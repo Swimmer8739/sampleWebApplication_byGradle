@@ -1,0 +1,48 @@
+//上手くいくほう
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+//ext {
+//  // MySQL connecterVersion
+//  mySQLVersion = '5.7.16'
+//
+//}
+
+
+jar {
+    baseName = 'gs-rest-service'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+dependencies {
+	//spring-boot
+    compile("org.springframework.boot:spring-boot-starter-web")
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    // JPA
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    // MySQL
+    compile('mysql:mysql-connector-java')
+    //Groovy
+    compile('org.codehaus.groovy:groovy-all')
+
+}

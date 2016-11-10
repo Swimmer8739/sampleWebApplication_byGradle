@@ -1,0 +1,9 @@
+
+DB:MySQL Ver14.14 Distrib5.7.16 forWin64
+
+ DB Name	:sbdb
+ Table Name	:counter1
+  id(int)
+  title(val)
+  count(int)
+
