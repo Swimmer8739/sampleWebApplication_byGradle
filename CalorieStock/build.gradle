@@ -1,0 +1,42 @@
+
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+
+//jar {
+//	baseName = 'gs-rest-service'
+//	version =  '0.1.0'
+//}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+	//spring-boot
+    compile("org.springframework.boot:spring-boot-starter-web")
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    // JPA
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    // MySQL
+    compile('mysql:mysql-connector-java')
+    //testCompile('org.dbunit:dbunit')
+
+    //Thymeleaf
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+
+}
