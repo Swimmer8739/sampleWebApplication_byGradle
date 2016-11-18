@@ -2,16 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-
 <title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<!-- css -->
+<link href="/css/hello.css" th:href="@{/css/hello.css}" rel="stylesheet"/>
+
+
 </head>
 
 
 <body>
 
-  <a th:href="@{/}">Topページ</a>
+  <a th:href="@{/login}">サインアウト</a>
+  <br/><br/><br/><br/>
   <div th:utext="${message1}"></div>
   <hr />
   <div

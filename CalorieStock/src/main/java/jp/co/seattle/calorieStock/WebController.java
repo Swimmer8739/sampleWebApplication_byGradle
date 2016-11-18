@@ -28,18 +28,11 @@ public class WebController {
     @RequestMapping("/list")
     public String goToList(Model model,@RequestParam("name") String name,@RequestParam("password") String password) {
 
-    	Integer input =t02userService.permitUser(name, password);
+    	Integer input =webModel.getID(name, password);
     	if (input ==null ){
-        	model.addAttribute("message1","ログインに失敗しました。");
-    		return "login";
+    		return webModel.makeForm_LoginFalse(model);
     	}else{
-
-
-        	model.addAttribute("message1","ログイン完了");
-        	model.addAttribute("name",name);
-        	model.addAttribute("items",t01tastyService.narrow(input));
-
-        	return "list";
+        	return webModel.makeForm_List(model,input , name);
 
     	}
     }

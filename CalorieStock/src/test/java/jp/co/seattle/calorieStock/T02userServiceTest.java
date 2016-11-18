@@ -30,7 +30,7 @@ public class T02userServiceTest {
 	T02userRepository SQL_user;
 
 	@Test
-	public void test_narrow_OK_TRUE() throws ParseException {
+	public void test_permitUser_OK_TRUE() throws ParseException {
 		//DataSetup
         SQL_tasty.deleteAll();
         SQL_user.deleteAll();
@@ -50,7 +50,7 @@ public class T02userServiceTest {
 	}
 
 	@Test
-	public void test_narrow_OK_Unmatched() throws ParseException {
+	public void test_permitUser_OK_Unmatched() throws ParseException {
 		//DataSetup
         SQL_tasty.deleteAll();
         SQL_user.deleteAll();
@@ -69,7 +69,7 @@ public class T02userServiceTest {
 	}
 
 	@Test
-	public void test_narrow_OK_NullInput() throws ParseException {
+	public void test_permitUser_OK_NullInput() throws ParseException {
 		//DataSetup
         SQL_tasty.deleteAll();
         SQL_user.deleteAll();
