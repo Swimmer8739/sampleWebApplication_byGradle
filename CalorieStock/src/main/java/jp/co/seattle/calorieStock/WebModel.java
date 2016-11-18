@@ -1,23 +1,36 @@
 package jp.co.seattle.calorieStock;
 
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
-import jp.co.seattle.calorieStock.repository.t01tastyRepository;
-import templates.ResponseForm;
+import jp.co.seattle.calorieStock.constant.ResponseForm;
+import jp.co.seattle.calorieStock.entity.T02user;
+import jp.co.seattle.calorieStock.web.form.LoginForm;
 
 @Service
 public class WebModel {
 
-	@Autowired //リポジトリを紐づけます
-	t01tastyRepository repository;
+	@Autowired
+	protected static T02user loginUser;
 
-	public String makeResponse(Model model){
 
-		model.addAttribute("name", "皆さん");
-		model.addAttribute("items", repository.findAll());
 
-		return ResponseForm.list.getString();
+	public String makeForm_Login( LoginForm form){
+
+		loginUser=new T02user();
+		form.setMessage1("<h1>CalorieStock</h1>");
+		form.setMessage2("Thymeleafを使用したサンプルWebアプリケーションです。");
+		form.setToday(Calendar.getInstance().getTime());
+
+		return ResponseForm.LOGIN.getString();
+	}
+
+	public void setUserName (String name){
+		loginUser.setName(name);
+	}
+	public void setPassword (String password){
+		loginUser.setPassword(password);
 	}
 }

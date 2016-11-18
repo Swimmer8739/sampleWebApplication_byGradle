@@ -1,13 +1,30 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
 <head>
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link th:href="@{/resources/css/base.css}" rel="stylesheet"
+  type="text/css" />
+<title>Thymeleaf Sample</title>
 </head>
-<body>
 
-	<p th:text="'Hello, ' + ${name} + '!'" />
-	<p th:text="'Hello, ' + ${name} + '!'" />
+
+<body>
+  <a th:href="@{/}">Topページ</a>
+  <div th:utext="${form.message1}"></div>
+  <hr />
+  <div th:text="${form.message2}"></div>
+  <div
+    th:text="'今日は' + ${#calendars.format(form.today,'yyyy/MM/dd')} + 'です。'"></div>
+  <br/>
+
+  <form th:action="@{/list}" th:object="${form}" method="post">
+    氏名：<input type="text" th:field="*{name}" />
+<br/>
+    パスワード：<input type="text" th:field="*{password}" />
+<br/><br/>
+    <input type="submit" name="login" value="ログイン" />
+  </form>
 
 </body>
 </html>

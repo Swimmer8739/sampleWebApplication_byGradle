@@ -3,9 +3,9 @@ package jp.co.seattle.calorieStock.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import jp.co.seattle.calorieStock.entity.T01tasty;
+import jp.co.seattle.calorieStock.entity.T02user;
 
 @Repository
-public interface t01tastyRepository extends JpaRepository<T01tasty, Integer>{
+public interface T02userRepository extends JpaRepository<T02user, Integer>{
 
 }

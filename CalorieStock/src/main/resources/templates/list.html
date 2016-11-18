@@ -1,25 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+
 <title>Insert title here</title>
 </head>
+
+
 <body>
 
-	<p th:text="'Hello, ' + ${name} + '!'" />
+  <a th:href="@{/}">Topページ</a>
+  <div th:utext="${message1}"></div>
+  <hr />
+  <div
+    th:text="'ようこそ、' + ${name} + 'さんの食事内容を表示します。'"></div>
+  <br/>
 
 	<table class="table table-sprite">
 	<tr>
-	<th>id</th>
 	<th>date</th>
 	<th>eats</th>
 	<th>calorie_kcal</th>
 	</tr>
 	<tr th:each="item, stat : ${items}" th:object="${item}">
-	<td th:text="*{id}">id</td>
-	<td th:text="*{date}">date</td>
-	<td th:text="*{eats}">eats</td>
-	<td th:text="*{calorie_kcal}">calorie_kcal</td>
+	<td th:text="*{date}">日付</td>
+	<td th:text="*{eats}">食事</td>
+	<td th:text="*{calorie_kcal}">カロリー(kcal)</td>
 	</tr>
 	</table>
 

@@ -1,7 +1,11 @@
-package templates;
+package jp.co.seattle.calorieStock.constant;
+
+
 
 public enum ResponseForm {
-	login("login"),list("list");
+	//manege html file name.
+	LIST("list"),LOGIN("login");
+
 
     private final String text;
     private ResponseForm(final String text) {
