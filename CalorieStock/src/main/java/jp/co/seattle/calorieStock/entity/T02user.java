@@ -47,7 +47,7 @@ public class T02user {
 
     // constructor --------------------------
 	public T02user() {
-
+		super();
 	}
 
 	public T02user(Integer id, String name, String password) {

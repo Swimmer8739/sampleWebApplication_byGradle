@@ -1,9 +1,12 @@
 package jp.co.seattle.calorieStock;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import jp.co.seattle.calorieStock.entity.T01tasty;
@@ -17,15 +20,24 @@ public class T01tastyService {
 	T01tastyRepository repository;
 
 	public List<Item> narrow (int userID){
-		//return List or BlankList.
+		//return List (Including Blank.)
 		List<Item> answer =new ArrayList<Item>();
 
 		for(T01tasty item:repository.findAll()){
 			if (userID==item.getUserID()){
-				answer.add(new Item(item.getDate(),item.getEats(),item.getCalorie_kcal()));
+				answer.add(new Item(item.getId(),item.getDate(),item.getEats(),item.getCalorie_kcal()));
 			}
 		}
 		return answer;
 	}
+	public void add(Date date, String eats ,double calorie_kcal,int userID)throws DataIntegrityViolationException {
+		//桁数超過や符号の成否はDB側で怒ったものを受け取る。
+		repository.saveAndFlush((new T01tasty(1,date, eats, calorie_kcal,userID)));
+	}
 
+	public void delete(Integer id)throws EmptyResultDataAccessException{
+		repository.delete(id);
+		repository.flush();
+	}
 }
+

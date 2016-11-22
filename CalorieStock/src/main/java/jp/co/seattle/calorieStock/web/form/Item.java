@@ -1,12 +1,21 @@
 package jp.co.seattle.calorieStock.web.form;
 
+
 import java.util.Date;
 
 public class Item {
 
+	private int id;
     private Date date;
     private String eats;
     private double calorie_kcal;
+
+	public final int getId() {
+		return id;
+	}
+	public final void setId(int id) {
+		this.id = id;
+	}
 
 	public final Date getDate() {
 		return date;
@@ -34,7 +43,8 @@ public class Item {
 	public Item(){
 
 	}
-	public Item(Date date,String eats,double calorie_kcal){
+	public Item(int id ,Date date,String eats,double calorie_kcal){
+		this.id=id;
 		this.date=date;
 		this.eats=eats;
 		this.calorie_kcal=calorie_kcal;

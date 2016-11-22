@@ -28,9 +28,7 @@ public class T01tasty {
 	protected int userID;
 
 	// setter & getter ---------------------
-	public T01tasty(){
-		super();
-	}
+
 
 	public Integer getId() {
 		return id;
@@ -68,8 +66,12 @@ public class T01tasty {
 		return userID;
 	}
 
-    // constructor --------------------------
 	public void setUserID() {
+	}
+
+    // constructor --------------------------
+	public T01tasty(){
+		super();
 	}
 
 	public T01tasty(Integer id, Date date ,String eats,Double calorie_kcal,int userID){

@@ -4,36 +4,98 @@
 <head>
 <title>Insert title here</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<!-- css -->
-<link href="/css/hello.css" th:href="@{/css/hello.css}" rel="stylesheet"/>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}" rel="stylesheet"  />
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
+	th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
 
 
 </head>
-
-
 <body>
+<script type="text/javascript">
 
-  <a th:href="@{/login}">サインアウト</a>
-  <br/><br/><br/><br/>
-  <div th:utext="${message1}"></div>
-  <hr />
-  <div
-    th:text="'ようこそ、' + ${name} + 'さんの食事内容を表示します。'"></div>
-  <br/>
+function submitSupport(cmd, object){
 
-	<table class="table table-sprite">
-	<tr>
-	<th>date</th>
-	<th>eats</th>
-	<th>calorie_kcal</th>
-	</tr>
-	<tr th:each="item, stat : ${items}" th:object="${item}">
-	<td th:text="*{date}">日付</td>
-	<td th:text="*{eats}">食事</td>
-	<td th:text="*{calorie_kcal}">カロリー(kcal)</td>
-	</tr>
-	</table>
+	if (window.confirm('実行しますか？')) {
+		var target = document.getElementById("table");
+		target.method = "post";
+
+		    // エレメントを作成
+		    var ele = document.createElement('input');
+		    // データを設定
+		    ele.setAttribute('type', 'hidden');
+		    ele.setAttribute('name', 'recordId');
+		    ele.setAttribute('value', String(object.getAttribute("table")));
+		    // 要素を追加
+		    target.appendChild(ele);
+		target.submit();
+	} else {
+		return false;
+	}
+}
+
+</script>
+
+	<a th:href="@{/login}">サインアウト</a>
+	<div th:utext="${message1}"></div>
+	<hr />
+
+	<div th:text="'ようこそ、' + ${name} + 'さんの食事内容を表示します。'"></div>
+	<br/>
+
+	<div class="form-inline">
+		<div class="form-group">
+			<div class="col-sm-2 control-label">
+			<label for="inputText"><abbr title="required"> / </abbr>日付</label>
+			<input type="datetime-local" class="form-control" id="inputText1" name="ftext1" th:field="${ftext1}" />
+			</div>
+
+			<div class="col-sm-2 control-label">
+			<label for="inputText"><abbr title="required"> / </abbr>食事</label>
+			<input type="text" class="form-control" id="inputText2" name="ftext2" th:field="${ftext2}" value ="${ftext2}"/>
+			</div>
+
+			<div class="col-sm-2 control-label">
+			<label for="inputText"><abbr title="required"> / </abbr>カロリー(kcal)</label>
+			<input type="number" class="form-control" id="inputText3" name="ftext3" th:field="${ftext3}" />
+			</div>
+
+			<div class="col-sm-6 control-label">
+			<button type="submit" name="update" >追加</button>
+			</div>
+		</div>
+	</div>
+	<br/>
+	<br/>
+
+	<form id="table" action="/list/table" method="post" >
+		<table class="table table-sprite">
+		<tr>
+		<th>日時</th>
+		<th>食事</th>
+		<th>カロリー(kcal)</th>
+		</tr>
+
+		<tr th:each="item, stat : ${items}" th:object="${item}">
+
+		<td th:text="*{date}">日付</td>
+		<td th:text="*{eats}">食事</td>
+		<td th:text="*{calorie_kcal}">カロリー(kcal)</td>
+		<td>
+			<button type="button" th:value="*{id}" onclick="submitSupport('update',this)">編集</button>
+		</td>
+		<td>
+			<button type="button" th:value="*{id}" onclick="submitSupport('delete',this)">削除</button>
+		</td>
+
+		</tr>
+		</table>
+	</form>
 
 </body>
 </html>

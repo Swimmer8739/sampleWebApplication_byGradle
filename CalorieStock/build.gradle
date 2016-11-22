@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+
         mavenCentral()
     }
     dependencies {
@@ -11,7 +12,6 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'spring-boot'
 
-
 repositories {
     mavenCentral()
 }
@@ -21,7 +21,7 @@ targetCompatibility = 1.8
 
 dependencies {
 	//spring-boot
-    compile("org.springframework.boot:spring-boot-starter-web")
+    compile('org.springframework.boot:spring-boot-starter-web')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
     // JPA
@@ -31,5 +31,8 @@ dependencies {
 
     //Thymeleaf
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+
+compile("org.webjars:jquery:2.1.4")
+compile("org.webjars:bootstrap:3.3.5")
 
 }
