@@ -34,6 +34,11 @@ public class T01tastyService {
 		//桁数超過や符号の成否はDB側で怒ったものを受け取る。
 		repository.saveAndFlush((new T01tasty(1,date, eats, calorie_kcal,userID)));
 	}
+	public void add(T01tasty entity)throws DataIntegrityViolationException {
+		//桁数超過や符号の成否はDB側で怒ったものを受け取る。
+		repository.saveAndFlush((new T01tasty(1,entity.getDate(), entity.getEats(), entity.getCalorie_kcal(),entity.getUserID())));
+	}
+
 
 	public void delete(Integer id)throws EmptyResultDataAccessException{
 		repository.delete(id);

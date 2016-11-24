@@ -16,7 +16,7 @@ import jp.co.seattle.calorieStock.repository.T02userRepository;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class WebModelTest {
+public class HtmlAttributerTest {
 
 	@Autowired
 	T02userRepository SQL_user;
@@ -25,7 +25,7 @@ public class WebModelTest {
 	T01tastyRepository SQL_tasty;
 
 	@Autowired
-	protected WebModel webModel;
+	protected HtmlAttributer webModel;
 
 
 	@Test

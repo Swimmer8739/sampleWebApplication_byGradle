@@ -19,24 +19,34 @@
 <body>
 <script type="text/javascript">
 
-function submitSupport(cmd, object){
+window.onload = function(){
+	var jikan= new Date();
 
-	if (window.confirm('実行しますか？')) {
-		var target = document.getElementById("table");
-		target.method = "post";
+	document.getElementById('request.date').value=jikan.getFullYear() +'/'+ (jikan.getMonth()+1) +'/'+ (jikan.getDay() );
+	document.getElementById('request.eats').value='';
+	document.getElementById('request.calorie_kcal').value=0.0;
+	}
 
-		    // エレメントを作成
-		    var ele = document.createElement('input');
-		    // データを設定
-		    ele.setAttribute('type', 'hidden');
-		    ele.setAttribute('name', 'recordId');
-		    ele.setAttribute('value', String(object.getAttribute("table")));
-		    // 要素を追加
-		    target.appendChild(ele);
-		target.submit();
+function sendCmd(button,cmd){
+	var msg='';
+
+	switch (cmd){
+	  case 'add':
+			msg='追加しますか？';
+	    break;
+	  case 'delete':
+			msg='削除しますか？';
+			document.getElementById('request.id').value=button.value;
+	    break;
+	  case 'change':
+	    break;
+	}
+
+	if (window.confirm(msg)) {
+		return true;
 	} else {
 		return false;
-	}
+	};
 }
 
 </script>
@@ -48,32 +58,37 @@ function submitSupport(cmd, object){
 	<div th:text="'ようこそ、' + ${name} + 'さんの食事内容を表示します。'"></div>
 	<br/>
 
+	<form id="target"  th:action="@{/list/submit}" th:object="${target}" method="post">
+
+		<input id="request.id" type="hidden" name="id" th:field="*{id}" />
 	<div class="form-inline">
 		<div class="form-group">
-			<div class="col-sm-2 control-label">
+			<div class="col-sm-3 control-label">
 			<label for="inputText"><abbr title="required"> / </abbr>日付</label>
-			<input type="datetime-local" class="form-control" id="inputText1" name="ftext1" th:field="${ftext1}" />
+			<input id="request.date" type="datetime" class="form-control" name="date" th:field="*{date}" />
 			</div>
 
-			<div class="col-sm-2 control-label">
+			<div class="col-sm-3 control-label">
 			<label for="inputText"><abbr title="required"> / </abbr>食事</label>
-			<input type="text" class="form-control" id="inputText2" name="ftext2" th:field="${ftext2}" value ="${ftext2}"/>
+			<input id="request.eats" type="text" class="form-control" name="eats" th:field="*{eats}" />
+			</div>
+
+			<div class="col-sm-3 control-label">
+			<label for="inputText"><abbr title="required"> / </abbr>カロリー(kcal)</label>
+			<input id="request.calorie_kcal" type="number" class="form-control" name="calorie_kcal" th:field="*{calorie_kcal}" />
 			</div>
 
 			<div class="col-sm-2 control-label">
-			<label for="inputText"><abbr title="required"> / </abbr>カロリー(kcal)</label>
-			<input type="number" class="form-control" id="inputText3" name="ftext3" th:field="${ftext3}" />
+				<br/>
+				<button id="cmd" type="submit" name="add" onclick="return sendCmd(this,'add')">追加</button>
 			</div>
 
-			<div class="col-sm-6 control-label">
-			<button type="submit" name="update" >追加</button>
-			</div>
 		</div>
 	</div>
+	</form>
 	<br/>
 	<br/>
 
-	<form id="table" action="/list/table" method="post" >
 		<table class="table table-sprite">
 		<tr>
 		<th>日時</th>
@@ -82,20 +97,17 @@ function submitSupport(cmd, object){
 		</tr>
 
 		<tr th:each="item, stat : ${items}" th:object="${item}">
+			<td th:text="*{date}">日付</td>
+			<td th:text="*{eats}">食事</td>
+			<td th:text="*{calorie_kcal}">カロリー(kcal)</td>
 
-		<td th:text="*{date}">日付</td>
-		<td th:text="*{eats}">食事</td>
-		<td th:text="*{calorie_kcal}">カロリー(kcal)</td>
-		<td>
-			<button type="button" th:value="*{id}" onclick="submitSupport('update',this)">編集</button>
-		</td>
-		<td>
-			<button type="button" th:value="*{id}" onclick="submitSupport('delete',this)">削除</button>
-		</td>
+			<td>
+				<button type="submit" name="delete" th:value="*{id}" onclick="return sendCmd(this,'delete')" form="target" >削除</button>
+			</td>
+			<td ></td>
 
 		</tr>
 		</table>
-	</form>
 
 </body>
 </html>

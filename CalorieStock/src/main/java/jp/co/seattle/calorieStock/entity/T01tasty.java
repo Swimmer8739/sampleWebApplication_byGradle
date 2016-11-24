@@ -66,7 +66,8 @@ public class T01tasty {
 		return userID;
 	}
 
-	public void setUserID() {
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 
     // constructor --------------------------
