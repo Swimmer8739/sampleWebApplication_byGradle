@@ -40,20 +40,6 @@ public class WebControllerTest {
         ;
     }
 
-	@Test
-	public void test_list_OK_ViewList() throws Exception {
-		//DataSetup
-		SQL_tasty.deleteAll();
-		SQL_user.deleteAll();
-
-        SQL_user.save(new T02user(1,"Akagi","seattle"));
-        SQL_user.flush();
-        this.mockMvc.perform(get("/list").param("name", "error").param("password", "false"))
-    		.andExpect(status().isOk())
-        	.andExpect(model().hasNoErrors())
-        ;
-	}
-
     @Test
     public void test_list_OK_redirectLogin() throws Exception {
 		//DataSetup
@@ -64,7 +50,7 @@ public class WebControllerTest {
         SQL_user.flush();
 
 		//test
-        mockMvc.perform(get("/list").param("name", "Akagi").param("password", "seattle"))
+        mockMvc.perform(post("/login/submit").param("name", "Akagi").param("password", "seattle"))
     		.andExpect(status().isOk())
         	.andExpect(model().hasNoErrors())
         ;

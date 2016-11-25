@@ -11,9 +11,9 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
 	th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
-
 
 </head>
 <body>
@@ -32,16 +32,17 @@ function sendCmd(button,cmd){
 
 	switch (cmd){
 	  case 'add':
-			msg='追加しますか？';
+			msg='追加します。';
 	    break;
 	  case 'delete':
-			msg='削除しますか？';
+			msg='削除します。';
 			document.getElementById('request.id').value=button.value;
 	    break;
-	  case 'change':
+	  case 'update':
+			msg='選択したレコードを入力エリアの内容で上書きします。';
+			document.getElementById('request.id').value=button.value;
 	    break;
 	}
-
 	if (window.confirm(msg)) {
 		return true;
 	} else {
@@ -50,7 +51,6 @@ function sendCmd(button,cmd){
 }
 
 </script>
-
 	<a th:href="@{/login}">サインアウト</a>
 	<div th:utext="${message1}"></div>
 	<hr />
@@ -64,7 +64,7 @@ function sendCmd(button,cmd){
 	<div class="form-inline">
 		<div class="form-group">
 			<div class="col-sm-3 control-label">
-			<label for="inputText"><abbr title="required"> / </abbr>日付</label>
+			<label for="inputText"><abbr title="required"> / </abbr>日時</label>
 			<input id="request.date" type="datetime" class="form-control" name="date" th:field="*{date}" />
 			</div>
 
@@ -73,22 +73,20 @@ function sendCmd(button,cmd){
 			<input id="request.eats" type="text" class="form-control" name="eats" th:field="*{eats}" />
 			</div>
 
-			<div class="col-sm-3 control-label">
+			<div class="col-sm-2 control-label">
 			<label for="inputText"><abbr title="required"> / </abbr>カロリー(kcal)</label>
 			<input id="request.calorie_kcal" type="number" class="form-control" name="calorie_kcal" th:field="*{calorie_kcal}" />
 			</div>
 
-			<div class="col-sm-2 control-label">
+			<div class="col-sm-1 control-label">
 				<br/>
-				<button id="cmd" type="submit" name="add" onclick="return sendCmd(this,'add')">追加</button>
+				<button id="cmd" type="submit" name="add" class="btn btn-large btn-primary" onclick="return sendCmd(this,'add')">追加</button>
 			</div>
-
 		</div>
 	</div>
 	</form>
 	<br/>
 	<br/>
-
 		<table class="table table-sprite">
 		<tr>
 		<th>日時</th>
@@ -100,9 +98,11 @@ function sendCmd(button,cmd){
 			<td th:text="*{date}">日付</td>
 			<td th:text="*{eats}">食事</td>
 			<td th:text="*{calorie_kcal}">カロリー(kcal)</td>
-
 			<td>
-				<button type="submit" name="delete" th:value="*{id}" onclick="return sendCmd(this,'delete')" form="target" >削除</button>
+				<button type="submit" name="update" th:value="*{id}" class="btn btn-large btn-primary" onclick="return sendCmd(this,'update')" form="target" >編集</button>
+			</td>
+			<td>
+				<button type="submit" name="delete" th:value="*{id}" class="btn btn-large btn-primary" onclick="return sendCmd(this,'delete')" form="target" >削除</button>
 			</td>
 			<td ></td>
 

@@ -16,9 +16,6 @@ public class HtmlAttributer {
 	@Autowired
 	T01tastyService t01tastyService;
 
-	@Autowired
-	T02userService t02userService;
-
 	public String makeForm_Login(LoginForm form){
 
 		form.setMessage1("<h1>CalorieStock</h1>");
@@ -29,7 +26,7 @@ public class HtmlAttributer {
 	}
 
 	public String makeForm_List(Model model,Integer userID,String name){
-    	model.addAttribute("message1","<h1>ログイン完了</h1>");
+    	model.addAttribute("message1","<h1>CalorieStock</h1>");
     	model.addAttribute("name",name);
     	model.addAttribute("target",(new Item()) );
     	model.addAttribute("items",t01tastyService.narrow(userID));
@@ -37,7 +34,4 @@ public class HtmlAttributer {
 		return ResponseForm.LIST.getString();
 	}
 
-	public Integer getID(String name , String password){
-		return t02userService.permitUser(name, password);
-	}
 }
