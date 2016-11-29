@@ -64,21 +64,21 @@ function sendCmd(button,cmd){
 	<div class="form-inline">
 		<div class="form-group">
 			<div class="col-sm-3 control-label">
-			<label for="inputText"><abbr title="required"> / </abbr>日時</label>
+			<label for="inputText">日時</label>
 			<input id="request.date" type="datetime" class="form-control" name="date" th:field="*{date}" />
 			</div>
 
 			<div class="col-sm-3 control-label">
-			<label for="inputText"><abbr title="required"> / </abbr>食事</label>
+			<label for="inputText">食事</label>
 			<input id="request.eats" type="text" class="form-control" name="eats" th:field="*{eats}" />
 			</div>
 
-			<div class="col-sm-2 control-label">
-			<label for="inputText"><abbr title="required"> / </abbr>カロリー(kcal)</label>
+			<div class="col-sm-3 control-label">
+			<label for="inputText">カロリー(kcal)</label>
 			<input id="request.calorie_kcal" type="number" class="form-control" name="calorie_kcal" th:field="*{calorie_kcal}" />
 			</div>
 
-			<div class="col-sm-1 control-label">
+			<div class="col-sm-3 control-label">
 				<br/>
 				<button id="cmd" type="submit" name="add" class="btn btn-large btn-primary" onclick="return sendCmd(this,'add')">追加</button>
 			</div>

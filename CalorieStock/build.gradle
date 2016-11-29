@@ -32,7 +32,8 @@ dependencies {
     //Thymeleaf
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 
-compile("org.webjars:jquery:2.1.4")
-compile("org.webjars:bootstrap:3.3.5")
+	//
+	compile("org.webjars:jquery:2.1.4")
+	compile("org.webjars:bootstrap:3.3.5")
 
 }

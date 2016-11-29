@@ -14,21 +14,21 @@ public class T02userService {
 	@Autowired
 	T02userRepository repository;
 
-	public Integer permitUser(String userName,String password){
-		//it dnot use userID.
+	public Integer permitUser(String userName, String password) {
+		// it dnot use userID.
 
 		List<T02user> items = repository.findAll();
-		Integer result=null;
-		try{
+		Integer result = null;
+		try {
 
-		for(T02user item:items){
-			if (userName.equals(item.getName())){
-				if(password.equals(item.getPassword())){
-					result= item.getId();
+			for (T02user item : items) {
+				if (userName.equals(item.getName())) {
+					if (password.equals(item.getPassword())) {
+						result = item.getId();
+					}
 				}
 			}
-		}
-		}catch(NullPointerException e){
+		} catch (NullPointerException e) {
 			return null;
 
 		}

@@ -2,6 +2,13 @@ package jp.co.seattle.calorieStock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +21,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import jp.co.seattle.calorieStock.entity.T02user;
 import jp.co.seattle.calorieStock.repository.T01tastyRepository;
 import jp.co.seattle.calorieStock.repository.T02userRepository;
+import jp.co.seattle.calorieStock.web.form.LoginForm;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -21,15 +29,32 @@ import jp.co.seattle.calorieStock.repository.T02userRepository;
 public class WebControllerTest {
 
 	@Autowired
-	T02userRepository SQL_user;
+	private T02userRepository SQL_user;
 
 	@Autowired
-	T01tastyRepository SQL_tasty;
+	private T01tastyRepository SQL_tasty;
 
 	@Autowired
 	private MockMvc mockMvc;
 
+	private Validator validator;
+
+	@Before
+	public void dataSetUp() throws Exception{
+		validator = Validation.buildDefaultValidatorFactory().getValidator();
+	}
+
 	// Viewパラメータテスト ---------------------
+	@Test
+	public void ValidTest() throws Exception{
+		LoginForm loginForm=new LoginForm();
+		loginForm.setName("name567890123456789012345678901");
+
+		Set<ConstraintViolation<LoginForm>> violations = validator.validate(loginForm);
+
+
+	}
+
 	@Test
     public void test_login_OK() throws Exception {
 		//test
@@ -51,7 +76,7 @@ public class WebControllerTest {
 
 		//test
         mockMvc.perform(post("/login/submit").param("name", "Akagi").param("password", "seattle"))
-    		.andExpect(status().isOk())
+    		.andExpect(view().name("redirect:/list"))
         	.andExpect(model().hasNoErrors())
         ;
     }

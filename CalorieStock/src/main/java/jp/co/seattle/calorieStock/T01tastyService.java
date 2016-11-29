@@ -19,36 +19,36 @@ public class T01tastyService {
 	@Autowired
 	T01tastyRepository repository;
 
-	public List<Item> narrow (int userID){
-		//return List (Including Blank.)
-		List<Item> answer =new ArrayList<Item>();
+	public List<Item> narrow(int userID) {
+		// return List (Including Blank.)
+		List<Item> answer = new ArrayList<Item>();
 
-		for(T01tasty item:repository.findAll()){
-			if (userID==item.getUserID()){
-				answer.add(new Item(item.getId(),item.getDate(),item.getEats(),item.getCalorie_kcal()));
+		for (T01tasty item : repository.findAll()) {
+			if (userID == item.getUserID()) {
+				answer.add(new Item(item.getId(), item.getDate(), item.getEats(), item.getCalorie_kcal()));
 			}
 		}
 		return answer;
 	}
 
-	public void add(Date date, String eats ,double calorie_kcal,int userID)throws DataIntegrityViolationException {
-		//桁数超過や符号の成否はDB側で怒ったものを受け取る。
-		repository.saveAndFlush((new T01tasty(1,date, eats, calorie_kcal,userID)));
+	public void add(Date date, String eats, double calorie_kcal, int userID) throws DataIntegrityViolationException {
+		// 桁数超過や符号の成否はDB側で怒ったものを受け取る。
+		repository.saveAndFlush((new T01tasty(1, date, eats, calorie_kcal, userID)));
 	}
-	public void add(T01tasty entity)throws DataIntegrityViolationException {
-		//桁数超過や符号の成否はDB側で怒ったものを受け取る。
+
+	public void add(T01tasty entity) throws DataIntegrityViolationException {
+		// 桁数超過や符号の成否はDB側で怒ったものを受け取る。
 		repository.saveAndFlush(entity);
 	}
 
-	public void delete(int id)throws EmptyResultDataAccessException{
+	public void delete(int id) throws EmptyResultDataAccessException {
 		repository.delete(id);
 		repository.flush();
 	}
 
-	public void update(T01tasty entity)throws EmptyResultDataAccessException,DataIntegrityViolationException{
+	public void update(T01tasty entity) throws EmptyResultDataAccessException, DataIntegrityViolationException {
 		repository.delete(entity.getId());
 		repository.flush();
 		repository.saveAndFlush(entity);
 	}
 }
-

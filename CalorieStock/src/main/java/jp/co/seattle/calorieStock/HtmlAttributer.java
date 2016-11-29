@@ -16,7 +16,7 @@ public class HtmlAttributer {
 	@Autowired
 	T01tastyService t01tastyService;
 
-	public String makeForm_Login(LoginForm form){
+	public String makeForm_Login(LoginForm form) {
 
 		form.setMessage1("<h1>CalorieStock</h1>");
 		form.setMessage2("Thymeleafを使用したサンプルWebアプリケーションです。");
@@ -25,11 +25,11 @@ public class HtmlAttributer {
 		return ResponseForm.LOGIN.getString();
 	}
 
-	public String makeForm_List(Model model,Integer userID,String name){
-    	model.addAttribute("message1","<h1>CalorieStock</h1>");
-    	model.addAttribute("name",name);
-    	model.addAttribute("target",(new Item()) );
-    	model.addAttribute("items",t01tastyService.narrow(userID));
+	public String makeForm_List(Model model, Integer userID, String name) {
+		model.addAttribute("message1", "<h1>CalorieStock</h1>");
+		model.addAttribute("name", name);
+		model.addAttribute("target", (new Item()));
+		model.addAttribute("items", t01tastyService.narrow(userID));
 
 		return ResponseForm.LIST.getString();
 	}

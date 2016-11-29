@@ -1,18 +1,20 @@
 package jp.co.seattle.calorieStock.web.form;
 
-
 import java.util.Date;
 
 public class Item {
 
+	// column ---------------------
 	private int id;
-    private Date date;
-    private String eats;
-    private double calorie_kcal;
+	private Date date;
+	private String eats;
+	private double calorie_kcal;
 
+	// setter & getter ---------------------
 	public final int getId() {
 		return id;
 	}
+
 	public final void setId(int id) {
 		this.id = id;
 	}
@@ -20,6 +22,7 @@ public class Item {
 	public final Date getDate() {
 		return date;
 	}
+
 	public final void setDate(Date date) {
 		this.date = date;
 	}
@@ -40,14 +43,16 @@ public class Item {
 		this.calorie_kcal = calorie_kcal;
 	}
 
-	public Item(){
+	// constructor --------------------------
+	public Item() {
 
 	}
-	public Item(int id ,Date date,String eats,double calorie_kcal){
-		this.id=id;
-		this.date=date;
-		this.eats=eats;
-		this.calorie_kcal=calorie_kcal;
+
+	public Item(int id, Date date, String eats, double calorie_kcal) {
+		this.id = id;
+		this.date = date;
+		this.eats = eats;
+		this.calorie_kcal = calorie_kcal;
 	}
 
 }
