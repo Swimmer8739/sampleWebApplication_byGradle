@@ -35,17 +35,17 @@ public class WebController {
 
 // Implementation in pages --------------------------
 
-	@RequestMapping(value = "/login")
+	@RequestMapping(value = "/login" , method = RequestMethod.GET)
 	public String loginView(@ModelAttribute("form") LoginForm userForm) {
 		return webModel.makeForm_Login(userForm);
 	}
 
-	@RequestMapping(value = "/list")
+	@RequestMapping(value = "/list" , method = RequestMethod.GET)
 	public String goToList(HttpServletRequest request, Model model) {
 
 		SessionAttribute sessionAttribute = (SessionAttribute) (request.getSession()).getAttribute("sessionAttribute");
 
-		if (sessionAttribute.getT02user().getId() == null) {
+		if (sessionAttribute == null) {
 			return "redirect:/" + ResponseForm.LOGIN.getString();
 		} else {
 			return webModel.makeForm_List(model, sessionAttribute.getT02user().getId(),
@@ -65,6 +65,7 @@ public class WebController {
 
 		// [1]permit user
 		Integer userID = t02userService.findId(userName, password);
+
 		if (userID != null) {
 
 			// [1-1]call 'getSession'

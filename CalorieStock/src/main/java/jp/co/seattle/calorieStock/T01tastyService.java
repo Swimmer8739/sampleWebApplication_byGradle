@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import jp.co.seattle.calorieStock.entity.T01tasty;
@@ -25,14 +26,14 @@ public class T01tastyService {
 	T01tastyRepository repository;
 
 	/**
-	 * T01tastyテーブルからレコードをuserIDで抽出します。
+	 * T01tastyテーブルからレコードを「userIDで抽出」「date昇順でソート」します。
 	 * 抽出するデータの構造はhtmlへ提供するリスト形式に編成されています。
 	 * 必ず0以上の長さのリストを返却し、例外はありません。
 	 * */
 	public List<Item> extractById(int userID) {
 		List<Item> answer = new ArrayList<Item>();
 
-		for (T01tasty item : repository.findAll()) {
+		for (T01tasty item : repository.findAll(new Sort(Sort.DEFAULT_DIRECTION, "date"))) {
 			if (userID == item.getUserID()) {
 				answer.add(new Item(item.getId(), item.getDate(), item.getEats(), item.getCalorie_kcal()));
 			}

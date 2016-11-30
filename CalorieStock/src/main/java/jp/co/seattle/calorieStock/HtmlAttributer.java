@@ -15,8 +15,14 @@ import jp.co.seattle.calorieStock.web.form.LoginForm;
  */
 //松村勉強めも
 //form,ModelはどちらもContorollerからポインタを値渡しで受け取りますが、それぞれ異なる手法でデータをインプットしています。
-//前者は自作クラス、後者はjava.util.Mapをimportしています。手法の近いはこの定義の違いに依存しています。
-// ※自作クラスは@ModelAttributeにより同名のフィールドにマッピングされます。
+//データの構造は、前者は原始的構造の自作クラス 後者はjava.util.Mapをimportされることで構成されており、インプット方法の違いはこれら構成の違いに引っ張られています。
+
+//※
+//インプットされた自作クラスは@ModelAttributeにより同名のフィールドにマッピングされます。
+//また、この原始的な自作クラスはJavaでは"JavaBean"と呼称し、規則性を持ったsetter/getterを実装することで外部コンポーネントからアクセス可能になりますｓ（即ち再利用性が高い）。
+//…。
+//…というかCで言うところのただの構造体だこれ。
+//setter/getterメソッドは他言語におけるプロパティのwriteOnly/readOnlyの下位互換として機能するようです。
 @Service
 public class HtmlAttributer {
 

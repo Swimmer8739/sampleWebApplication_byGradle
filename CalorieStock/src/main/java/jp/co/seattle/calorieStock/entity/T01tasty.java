@@ -28,45 +28,37 @@ public class T01tasty {
 	protected int userID;
 
 // setter & getter ---------------------
-
-	public Integer getId() {
-		return id;
-	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public java.util.Date getDate() {
-		return date;
-	}
-
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
-	public String getEats() {
-		return eats;
-	}
-
 	public void setEats(String eats) {
 		this.eats = eats;
 	}
-
-	public double getCalorie_kcal() {
-		return calorie_kcal;
-	}
-
 	public void setCalorie_kcal(double calorie_kcal) {
 		this.calorie_kcal = calorie_kcal;
 	}
 
-	public int getUserID() {
-		return userID;
-	}
-
 	public void setUserID(int userID) {
 		this.userID = userID;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+	public java.util.Date getDate() {
+		return date;
+	}
+	public String getEats() {
+		return eats;
+	}
+	public double getCalorie_kcal() {
+		return calorie_kcal;
+	}
+	public int getUserID() {
+		return userID;
 	}
 
 // constructor --------------------------
