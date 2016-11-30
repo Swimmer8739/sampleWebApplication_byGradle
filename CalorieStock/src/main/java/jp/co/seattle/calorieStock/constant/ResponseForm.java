@@ -1,9 +1,10 @@
 package jp.co.seattle.calorieStock.constant;
 
 
-
+/**
+ * HTMLファイル名の一覧です。
+ * */
 public enum ResponseForm {
-	//manege html file name.
 	LIST("list"),LOGIN("login");
 
 

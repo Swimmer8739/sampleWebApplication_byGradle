@@ -8,13 +8,22 @@ import org.springframework.stereotype.Service;
 import jp.co.seattle.calorieStock.entity.T02user;
 import jp.co.seattle.calorieStock.repository.T02userRepository;
 
+/**
+ * データベース間でデータの受け渡しをします。
+ * 当クラスはXXXXサーバー.YYYYデータベース.T02userテーブルと紐付けられています。
+ * 「XXXX」「YYYY」についてはプロパティファイルを参照ください。
+ * */
 @Service
 public class T02userService {
 
 	@Autowired
 	T02userRepository repository;
 
-	public Integer permitUser(String userName, String password) {
+	/**
+	 * T02userテーブルからIDを取得します。
+	 * アンマッチの場合、例外ではなくnullを返却します。
+	 * */
+	public Integer findId(String userName, String password) {
 		// it dnot use userID.
 
 		List<T02user> items = repository.findAll();

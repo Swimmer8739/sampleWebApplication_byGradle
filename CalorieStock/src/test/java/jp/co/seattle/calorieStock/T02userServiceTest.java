@@ -40,7 +40,7 @@ public class T02userServiceTest {
         SQL_user.flush();
 
 		//test
-		Integer result =repository.permitUser(
+		Integer result =repository.findId(
 				SQL_user.findAll(new Sort("id")).get(0).getName(),
 				SQL_user.findAll(new Sort("id")).get(0).getPassword()
 		);
@@ -59,7 +59,7 @@ public class T02userServiceTest {
         SQL_user.flush();
 
 		//test
-        Integer result =repository.permitUser(
+        Integer result =repository.findId(
 				SQL_user.findAll(new Sort("id")).get(0).getName(),
 				SQL_user.findAll(new Sort("id")).get(0).getPassword()+ "addString"
 		);
@@ -78,7 +78,7 @@ public class T02userServiceTest {
         SQL_user.flush();
 
 		//test
-        Integer result =repository.permitUser(
+        Integer result =repository.findId(
 				null,
 				null
 		);

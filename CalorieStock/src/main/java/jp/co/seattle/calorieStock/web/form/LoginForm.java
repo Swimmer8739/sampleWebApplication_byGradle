@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class LoginForm {
 
-	// column ---------------------
+// column ---------------------
 	private String message1;
 	private String message2;
 	private Date today;
 	private String name;
 	private String password;
 
-	// setter & getter ---------------------
+// setter & getter ---------------------
 	public final String getMessage1() {
 		return message1;
 	}

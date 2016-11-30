@@ -20,20 +20,23 @@ import jp.co.seattle.calorieStock.entity.T02user;
 import jp.co.seattle.calorieStock.web.form.Item;
 import jp.co.seattle.calorieStock.web.form.LoginForm;
 
+/**
+ * Push形式MVCモデルのContoroller層です。
+ */
 @Controller
 public class WebController {
 
 	@Autowired
 	protected HtmlAttributer webModel;
-
 	@Autowired
 	T01tastyService t01tastyService;
 	@Autowired
 	T02userService t02userService;
 
+// Implementation in pages --------------------------
+
 	@RequestMapping(value = "/login")
 	public String loginView(@ModelAttribute("form") LoginForm userForm) {
-
 		return webModel.makeForm_Login(userForm);
 	}
 
@@ -50,18 +53,28 @@ public class WebController {
 		}
 	}
 
+// Implementation in SubmitButton --------------------------
+	/**
+	 * login/submitの目的は大きく２つ。
+	 *  ひとつはパスワードによるユーザー照合。
+	 *  もうひとつはgetSessionのコール。
+	 */
 	@RequestMapping(value = "/login/submit", method = RequestMethod.POST)
 	public String loginSubmit(HttpServletRequest request, @RequestParam("name") String userName,
 			@RequestParam("password") String password) {
-		SessionAttribute sessionAttribute = new SessionAttribute(
-				new T02user(t02userService.permitUser(userName, password), userName, password));
 
-		if (sessionAttribute.getT02user().getId() != null) {
+		// [1]permit user
+		Integer userID = t02userService.findId(userName, password);
+		if (userID != null) {
+
+			// [1-1]call 'getSession'
 			HttpSession httpSession = request.getSession();
-
 			if (httpSession.isNew()) {
+				// [1-1-1]attribute set up
+				SessionAttribute sessionAttribute = (new SessionAttribute(new T02user(userID, userName, password)));
 				httpSession.setAttribute("sessionAttribute", sessionAttribute);
 			} else {
+				// [1-1-2]
 				// Do nothing
 			}
 			return "redirect:/" + ResponseForm.LIST.getString();
@@ -70,16 +83,27 @@ public class WebController {
 		}
 	}
 
+	/**
+	 * リストへのadd
+	 */
+	//松村勉強メモ
+	//明示的なBindingResultが強制されましたがresultの使い道はありません。
 	@RequestMapping(value = "/list/submit", params = "add", method = RequestMethod.POST)
 	public String add(@Valid @ModelAttribute("target") Item target, BindingResult result, HttpServletRequest request) {
 
 		SessionAttribute sessionAttribute = (SessionAttribute) (request.getSession()).getAttribute("sessionAttribute");
-		t01tastyService.add(target.getDate(), target.getEats(), target.getCalorie_kcal(),
+
+		T01tasty entity = new T01tasty(target.getId(), target.getDate(), target.getEats(), target.getCalorie_kcal(),
 				sessionAttribute.getT02user().getId());
+		t01tastyService.add(entity);
 
 		return "redirect:/" + ResponseForm.LIST.getString();
 	}
-
+	/**
+	 * リストへのdelete
+	 */
+	//松村勉強メモ
+	//明示的なBindingResultが強制されましたがresultの使い道はありません。
 	@RequestMapping(value = "/list/submit", params = "delete", method = RequestMethod.POST)
 	public String delete(@Valid @ModelAttribute("target") Item target, BindingResult result,
 			HttpServletRequest request) {
@@ -88,7 +112,11 @@ public class WebController {
 
 		return "redirect:/" + ResponseForm.LIST.getString();
 	}
-
+	/**
+	 * リストへのupdate
+	 */
+	//松村勉強メモ
+	//明示的なBindingResultが強制されましたがresultの使い道はありません。
 	@RequestMapping(value = "/list/submit", params = "update", method = RequestMethod.POST)
 	public String update(@Valid @ModelAttribute("target") Item target, BindingResult result,
 			HttpServletRequest request) {
@@ -96,7 +124,7 @@ public class WebController {
 
 		T01tasty entity = new T01tasty(target.getId(), target.getDate(), target.getEats(), target.getCalorie_kcal(),
 				sessionAttribute.getT02user().getId());
-		t01tastyService.delete(target.getId());
+		t01tastyService.delete(entity.getId());
 		t01tastyService.add(entity);
 
 		return "redirect:/" + ResponseForm.LIST.getString();

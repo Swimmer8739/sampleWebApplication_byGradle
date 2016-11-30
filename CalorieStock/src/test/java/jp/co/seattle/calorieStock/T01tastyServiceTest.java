@@ -69,9 +69,9 @@ public class T01tastyServiceTest {
         SQL_tasty.flush();
 
 		//test
-		List<Item> itemsA =repository.narrow(SQL_user.findAll(new Sort("id")).get(0).getId());
-		List<Item> itemsB =repository.narrow(SQL_user.findAll(new Sort("id")).get(1).getId());
-		List<Item> itemsC =repository.narrow(SQL_user.findAll(new Sort("id")).get(2).getId());
+		List<Item> itemsA =repository.extractById(SQL_user.findAll(new Sort("id")).get(0).getId());
+		List<Item> itemsB =repository.extractById(SQL_user.findAll(new Sort("id")).get(1).getId());
+		List<Item> itemsC =repository.extractById(SQL_user.findAll(new Sort("id")).get(2).getId());
 
 		//assert
 		assertEquals(6, SQL_tasty.findAll().size());
@@ -91,7 +91,7 @@ public class T01tastyServiceTest {
         SQL_tasty.flush();
 
 		//test
-		List<Item> items =repository.narrow(-1);
+		List<Item> items =repository.extractById(-1);
 
 		//assert
 		assertEquals(0, items.size());
@@ -103,7 +103,7 @@ public class T01tastyServiceTest {
         SQL_user.flush();
 
 		//test
-		List<Item> items =repository.narrow(SQL_user.findAll().get(0).getId());
+		List<Item> items =repository.extractById(SQL_user.findAll().get(0).getId());
 
 		//assert
 		assertEquals(0, items.size());

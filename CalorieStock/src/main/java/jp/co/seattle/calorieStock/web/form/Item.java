@@ -4,13 +4,13 @@ import java.util.Date;
 
 public class Item {
 
-	// column ---------------------
+// column ---------------------
 	private int id;
 	private Date date;
 	private String eats;
 	private double calorie_kcal;
 
-	// setter & getter ---------------------
+// setter & getter ---------------------
 	public final int getId() {
 		return id;
 	}
@@ -43,7 +43,7 @@ public class Item {
 		this.calorie_kcal = calorie_kcal;
 	}
 
-	// constructor --------------------------
+// constructor --------------------------
 	public Item() {
 
 	}

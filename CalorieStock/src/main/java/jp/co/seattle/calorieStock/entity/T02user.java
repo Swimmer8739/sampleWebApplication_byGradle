@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class T02user {
 
-	// column ---------------------
+// column ---------------------
 	@Id
 	@GeneratedValue
 	protected Integer id;
@@ -20,7 +20,7 @@ public class T02user {
 	protected String password;
 
 
-	// setter & getter ---------------------
+// setter & getter ---------------------
 	public Integer getId() {
 		return id;
 	}
@@ -45,7 +45,7 @@ public class T02user {
 		this.password = password;
 	}
 
-    // constructor --------------------------
+// constructor --------------------------
 	public T02user() {
 		super();
 	}

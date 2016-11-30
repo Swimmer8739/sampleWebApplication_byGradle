@@ -2,10 +2,10 @@ package jp.co.seattle.calorieStock.entity;
 
 public class SessionAttribute {
 
-	// column ---------------------
+// column ---------------------
 	T02user t02user;
 
-	// setter & getter ---------------------
+// setter & getter ---------------------
 	public final T02user getT02user() {
 		return t02user;
 	}
@@ -14,7 +14,7 @@ public class SessionAttribute {
 		this.t02user = t02user;
 	}
 
-	// constructor --------------------------
+// constructor --------------------------
 	public SessionAttribute() {
 		super();
 		this.t02user = new T02user();
