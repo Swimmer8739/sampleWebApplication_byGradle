@@ -44,15 +44,61 @@ public class WebControllerTest {
 		validator = Validation.buildDefaultValidatorFactory().getValidator();
 	}
 
-	// Viewパラメータテスト ---------------------
+// Implementation in Pages --------------------------
+
+	@Test
+    public void test_ViewLogin_OK() throws Exception {
+	//描写
+		//test
+        this.mockMvc.perform(get("/login"))
+        	.andExpect(status().isOk())
+            .andExpect(MockMvcResultMatchers.view().name("login"))
+            .andExpect(model().hasNoErrors())
+        ;
+
+    //パラメータ
+
+    }
+
+	@Test
+    public void test_ViewLogin_OK_RedirectFromList() throws Exception {
+	//描写
+        //Data Set Up
+		SQL_tasty.deleteAll();
+        SQL_user.deleteAll();
+        SQL_user.save(new T02user(1,"tanaka","seattle"));
+        SQL_user.flush();
+
+		//test
+        this.mockMvc.perform(post("/login/submit").param("name", "Akagi").param("password", "FalsePassword"))
+    		.andExpect(view().name("redirect:/login"))
+    		.andExpect(model().hasNoErrors())
+    		.andExpect(status().isOk())
+        ;
+    }
+
+	@Test
+    public void test_ViewList_OK() throws Exception {
+	//描写
+		//test
+		this.mockMvc.perform(post("/login/submit").param("name", "Akagi").param("password", "seattle"))
+        	.andExpect(view().name("redirect:/list"))
+    		.andExpect(model().hasNoErrors())
+    		.andExpect(status().isOk())
+    	;
+
+
+    //パラメータ
+
+    }
+
+
 	@Test
 	public void ValidTest() throws Exception{
 		LoginForm loginForm=new LoginForm();
 		loginForm.setName("name567890123456789012345678901");
 
 		Set<ConstraintViolation<LoginForm>> violations = validator.validate(loginForm);
-
-
 	}
 
 	@Test
@@ -64,6 +110,8 @@ public class WebControllerTest {
             .andExpect(model().hasNoErrors())
         ;
     }
+
+// Implementation in SubmitButton --------------------------
 
     @Test
     public void test_list_OK_redirectLogin() throws Exception {

@@ -33,8 +33,8 @@ public class WebController {
 	@Autowired
 	T02userService t02userService;
 
-// Implementation in pages --------------------------
-
+// Implementation in Pages --------------------------
+// Only RequestMethod.GET
 	@RequestMapping(value = "/login" , method = RequestMethod.GET)
 	public String loginView(@ModelAttribute("form") LoginForm userForm) {
 		return webModel.makeForm_Login(userForm);
@@ -54,6 +54,7 @@ public class WebController {
 	}
 
 // Implementation in SubmitButton --------------------------
+// Only RequestMethod.POST
 	/**
 	 * login/submitの目的は大きく２つ。
 	 *  ひとつはパスワードによるユーザー照合。
