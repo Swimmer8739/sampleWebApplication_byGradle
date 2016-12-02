@@ -2,9 +2,6 @@ package jp.co.seattle.calorieStock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import java.util.Set;
-
-import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
@@ -21,7 +18,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import jp.co.seattle.calorieStock.entity.T02user;
 import jp.co.seattle.calorieStock.repository.T01tastyRepository;
 import jp.co.seattle.calorieStock.repository.T02userRepository;
-import jp.co.seattle.calorieStock.web.form.LoginForm;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -48,21 +44,17 @@ public class WebControllerTest {
 
 	@Test
     public void test_ViewLogin_OK() throws Exception {
-	//描写
 		//test
-        this.mockMvc.perform(get("/login"))
-        	.andExpect(status().isOk())
-            .andExpect(MockMvcResultMatchers.view().name("login"))
-            .andExpect(model().hasNoErrors())
+		this.mockMvc.perform(get("/login"))
+			.andExpect(status().isOk())
+			.andExpect(MockMvcResultMatchers.view().name("login"))
+			.andExpect(model().hasNoErrors())
         ;
-
-    //パラメータ
 
     }
 
 	@Test
     public void test_ViewLogin_OK_RedirectFromList() throws Exception {
-	//描写
         //Data Set Up
 		SQL_tasty.deleteAll();
         SQL_user.deleteAll();
@@ -73,43 +65,19 @@ public class WebControllerTest {
         this.mockMvc.perform(post("/login/submit").param("name", "Akagi").param("password", "FalsePassword"))
     		.andExpect(view().name("redirect:/login"))
     		.andExpect(model().hasNoErrors())
-    		.andExpect(status().isOk())
         ;
     }
 
 	@Test
     public void test_ViewList_OK() throws Exception {
-	//描写
 		//test
 		this.mockMvc.perform(post("/login/submit").param("name", "Akagi").param("password", "seattle"))
         	.andExpect(view().name("redirect:/list"))
     		.andExpect(model().hasNoErrors())
-    		.andExpect(status().isOk())
     	;
-
-
-    //パラメータ
-
     }
 
 
-	@Test
-	public void ValidTest() throws Exception{
-		LoginForm loginForm=new LoginForm();
-		loginForm.setName("name567890123456789012345678901");
-
-		Set<ConstraintViolation<LoginForm>> violations = validator.validate(loginForm);
-	}
-
-	@Test
-    public void test_login_OK() throws Exception {
-		//test
-        this.mockMvc.perform(get("/login"))
-        	.andExpect(status().isOk())
-            .andExpect(MockMvcResultMatchers.view().name("login"))
-            .andExpect(model().hasNoErrors())
-        ;
-    }
 
 // Implementation in SubmitButton --------------------------
 
